@@ -22,7 +22,6 @@ int main (int argc, char *argv[])
             if (sem == NULL)
             {
                 fprintf(stderr, "sem_open failure\n");
-                sem_close(sem);
                 exit(0);
             }
         }
@@ -44,7 +43,7 @@ int main (int argc, char *argv[])
     else if(pid<0)
     {
         fprintf(stderr, "fork error\n");
-
+        exit(-1);
     }
     else
     {
@@ -57,7 +56,6 @@ int main (int argc, char *argv[])
             if (sem == NULL)
             {
                 fprintf(stderr, "sem_open failure\n");
-                sem_close(sem);
                 exit(0);
             }
         }
@@ -80,5 +78,7 @@ int main (int argc, char *argv[])
     }
     sem_close(sem);
     sem_unlink(SEM_NAME);
+
+    return 0;
 }
 
